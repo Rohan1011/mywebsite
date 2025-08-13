@@ -1,19 +1,22 @@
-async function sendPrompt() {
-    const prompt = document.getElementById("prompt").value.trim();
-    if (!prompt) return;
+async function generateText(prompt) {
+  const response = await fetch("https://9202aea62de0.ngrok-free.app/api/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "ngrok-skip-browser-warning": "true"
+    },
+    body: JSON.stringify({
+      model: "llama3.1:8b",
+      prompt: prompt,
+      stream: false
+    })
+  });
 
-    document.getElementById("answer").innerText = "Thinking...";
+  if (!response.ok) {
+    throw new Error(`HTTP error ${response.status}: ${await response.text()}`);
+  }
 
-    try {
-        const response = await fetch('/ollama-api/api/generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ model: 'llama3.1:8b', prompt, stream: false })
-        });
-
-        const data = await response.json();
-        document.getElementById("answer").innerText = data.response || "No response from Ollama.";
-    } catch (error) {
-        document.getElementById("answer").innerText = "Error: " + error;
-    }
+  const data = await response.json();
+  console.log("Ollama raw response:", data);
+  return data;
 }
