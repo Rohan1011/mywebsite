@@ -1,9 +1,12 @@
+// In your ollama.js, add authentication headers if needed
+
 async function generateText(prompt) {
   const response = await fetch("https://9202aea62de0.ngrok-free.app/api/generate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "ngrok-skip-browser-warning": "true"
+      "Authorization": "31EbWVidR4eM9lokSrBAmyNSvc5_3H2XTGvii4meLk1skaYrM"
     },
     body: JSON.stringify({
       model: "llama3.1:8b",
