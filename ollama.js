@@ -1,25 +1,36 @@
-// In your ollama.js, add authentication headers if needed
+async function sendPrompt() {
+    const prompt = document.getElementById('prompt').value;
+    const answerDiv = document.getElementById('answer');
+    
+    if (!prompt.trim()) {
+        answerDiv.textContent = "Please enter a question";
+        return;
+    }
 
-async function generateText(prompt) {
-  const response = await fetch("https://9202aea62de0.ngrok-free.app/api/generate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "ngrok-skip-browser-warning": "true"
-      "Authorization": "31EbWVidR4eM9lokSrBAmyNSvc5_3H2XTGvii4meLk1skaYrM"
-    },
-    body: JSON.stringify({
-      model: "llama3.1:8b",
-      prompt: prompt,
-      stream: false
-    })
-  });
+    answerDiv.textContent = "Thinking...";
+    
+    try {
+        const response = await fetch('/ollama-api/api/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
+            },
+            body: JSON.stringify({
+                model: "llama3.1:8b",
+                prompt: prompt,
+                stream: false
+            })
+        });
 
-  if (!response.ok) {
-    throw new Error(`HTTP error ${response.status}: ${await response.text()}`);
-  }
+        if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+        }
 
-  const data = await response.json();
-  console.log("Ollama raw response:", data);
-  return data;
+        const data = await response.json();
+        answerDiv.textContent = data.response || "No response generated";
+    } catch (error) {
+        console.error('Error:', error);
+        answerDiv.textContent = `Error: ${error.message}`;
+    }
 }
