@@ -14,7 +14,8 @@ async function sendPrompt() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': 'true'
+                'ngrok-skip-browser-warning': 'true',
+                "Authorization": "31EbWVidR4eM9lokSrBAmyNSvc5_3H2XTGvii4meLk1skaYrM"
             },
             body: JSON.stringify({
                 model: "llama3.1:8b",
