@@ -8,7 +8,7 @@ async function sendPrompt() {
         const response = await fetch('/ollama-api/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ model: 'llama3.1:8b', prompt })
+            body: JSON.stringify({ model: 'llama3.1:8b', prompt, stream: false })
         });
 
         const data = await response.json();
