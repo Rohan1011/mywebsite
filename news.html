@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Daily News
+  </title>
+  <style>
+   /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    .card-content h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #203a43;
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      color: #555;
+    }
+
+    .card-content a {
+      display: inline-block;
+      text-decoration: none;
+      background: #203a43;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .card-content a:hover {
+      background: #2c5364;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: #203a43;
+      color: white;
+      font-size: 0.9rem;
+    }
+  </style>
+ </head>
+ <body>
+  <header>
+   <h1>
+    Daily News Digest
+   </h1>
+   <p>
+    Stay updated with the latest headlines
+   </p>
+  </header>
+  <main>
+   <div class="card">
+    <img alt="News image" src="https://nbcsports.brightspotcdn.com/dims4/default/1780dc8/2147483647/strip/true/crop/6000x3375+0+312/resize/1440x810!/quality/90/?url=https%3A%2F%2Fnbc-sports-production-nbc-sports.s3.us-east-1.amazonaws.com%2Fbrightspot%2Ff2%2Fbc%2F12f3c9ef423b8c2c5214fef21d42%2Fhttps-delivery-gettyimages.com%2Fdownloads%2F2229353149"/>
+    <div class="card-content">
+     <h2>
+      NCAA imposes 10-year "show cause" order on Jim Harbaugh - NBC Sports
+     </h2>
+     <p>
+      As it relates to college football, Chargers coach Jim Harbaugh will be attacking no days with an enthusiasm known to mankind. The NCAA has imposed a 10-year show cause order o… [+1786 chars]
+     </p>
+     <a href="https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/ncaa-imposes-10-year-show-cause-order-on-jim-harbaugh" target="_blank">
+      Read More
+     </a>
+    </div>
+   </div>
+   <div class="card">
+    <img alt="News image" src="https://images.axios.com/GF5S9Dei-aieMg45WpP7mC_1_SI=/0x0:1920x1080/1366x768/2025/08/15/1755268177640.jpeg"/>
+    <div class="card-content">
+     <h2>
+      Newsom mocks Trump's social media in a flurry of redistricting posts - Axios
+     </h2>
+     <p>
+      What he's saying: "I'm just following his example," Newsom told reporters Thursday. "If you have issues with what I'm putting out, you sure as hell should have concerns with what he's putting out as … [+1439 chars]
+     </p>
+     <a href="https://www.axios.com/2025/08/15/newsom-social-media-trump-redistricting" target="_blank">
+      Read More
+     </a>
+    </div>
+   </div>
+   <div class="card">
+    <img alt="News image" src="https://source.unsplash.com/600x400/?news"/>
+    <div class="card-content">
+     <h2>
+      South Africa v Australia: Rugby Championship Test – live
+     </h2>
+     <p>
+      &lt;strong&gt;Minute-by-minute report&lt;/strong&gt;: The Wallabies kick off their campaign against the world No 1 Springboks in Johannesburg. Join Daniel Gallan for updates
+     </p>
+     <a href="https://www.theguardian.com/sport/live/2025/aug/16/south-africa-springboks-australia-wallabies-rugby-championship-test-live-score-updates-ellis-park-stadium-johannesburg" target="_blank">
+      Read More
+     </a>
+    </div>
+   </div>
+   <div class="card">
+    <img alt="News image" src="https://source.unsplash.com/600x400/?news"/>
+    <div class="card-content">
+     <h2>
+      Wolves v Manchester City: Premier League – live
+     </h2>
+     <p>
+      &lt;strong&gt;Minute-by-minute report:&lt;/strong&gt; Pep Guardiola’s side kick off their campaign at Molineux. Join Scott Murray for updates
+     </p>
+     <a href="https://www.theguardian.com/football/live/2025/aug/16/wolves-v-manchester-city-premier-league-live" target="_blank">
+      Read More
+     </a>
+    </div>
+   </div>
+   <div class="card">
+    <img alt="News image" src="https://source.unsplash.com/600x400/?news"/>
+    <div class="card-content">
+     <h2>
+      Sunderland 3-0 West Ham, Tottenham 3-0 Burnley, Brighton 1-1 Fulham – clockwatch live
+     </h2>
+     <p>
+      Richarlison scored twice, including a stunning volley, Fulham equalised in added time and Sunderland roared to victory
+     </p>
+     <a href="https://www.theguardian.com/football/live/2025/aug/16/brighton-v-fulham-tottenham-v-burnley-sunderland-v-west-ham-and-more-clockwatch-live" target="_blank">
+      Read More
+     </a>
+    </div>
+   </div>
+  </main>
+  <footer>
+   <p>
+    © 2025 Daily News | Rohan Reddy
+   </p>
+  </footer>
+ </body>
+</html>
