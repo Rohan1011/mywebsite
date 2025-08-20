@@ -92,3 +92,108 @@ free(arr_serial);
 free(arr_parallel);
 return 0;
 }
+-----------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
+#include <time.h>
+
+#define SIZE 100000
+
+// Merge function
+void merge(int arr[], int temp[], int left, int mid, int right) {
+    int i = left, j = mid + 1, k = left;
+
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
+    }
+
+    while (i <= mid) temp[k++] = arr[i++];
+    while (j <= right) temp[k++] = arr[j++];
+
+    for (i = left; i <= right; i++)
+        arr[i] = temp[i];
+}
+
+// Serial merge sort
+void serialMergeSort(int arr[], int temp[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        serialMergeSort(arr, temp, left, mid);
+        serialMergeSort(arr, temp, mid + 1, right);
+        merge(arr, temp, left, mid, right);
+    }
+}
+
+// Parallel merge sort using OpenMP tasks
+void parallelMergeSort(int arr[], int temp[], int left, int right, int depth) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        if (depth < 4) { // Limit recursion depth for tasks
+            #pragma omp task shared(arr, temp)
+            parallelMergeSort(arr, temp, left, mid, depth + 1);
+
+            #pragma omp task shared(arr, temp)
+            parallelMergeSort(arr, temp, mid + 1, right, depth + 1);
+
+            #pragma omp taskwait
+        } else {
+            serialMergeSort(arr, temp, left, mid);
+            serialMergeSort(arr, temp, mid + 1, right);
+        }
+        merge(arr, temp, left, mid, right);
+    }
+}
+
+int main() {
+    int *arr_serial = (int *)malloc(SIZE * sizeof(int));
+    int *arr_parallel = (int *)malloc(SIZE * sizeof(int));
+    int *temp_serial = (int *)malloc(SIZE * sizeof(int));
+    int *temp_parallel = (int *)malloc(SIZE * sizeof(int));
+
+    srand(time(NULL)); // Seed random numbers
+    for (int i = 0; i < SIZE; i++) {
+        int val = rand() % 100000;
+        arr_serial[i] = val;
+        arr_parallel[i] = val;
+    }
+
+    // Serial timing
+    double start_serial = omp_get_wtime();
+    serialMergeSort(arr_serial, temp_serial, 0, SIZE - 1);
+    double end_serial = omp_get_wtime();
+    double time_serial = end_serial - start_serial;
+
+    // Parallel timing
+    double start_parallel = omp_get_wtime();
+    #pragma omp parallel
+    {
+        #pragma omp single
+        parallelMergeSort(arr_parallel, temp_parallel, 0, SIZE - 1, 0);
+    }
+    double end_parallel = omp_get_wtime();
+    double time_parallel = end_parallel - start_parallel;
+
+    // Results
+    printf("Serial Merge Sort Time   : %.6f seconds\n", time_serial);
+    printf("Parallel Merge Sort Time : %.6f seconds\n", time_parallel);
+
+    // Verification
+    for (int i = 0; i < SIZE; i++) {
+        if (arr_serial[i] != arr_parallel[i]) {
+            printf("Mismatch at index %d\n", i);
+            break;
+        }
+    }
+
+    free(arr_serial);
+    free(arr_parallel);
+    free(temp_serial);
+    free(temp_parallel);
+
+    return 0;
+}
